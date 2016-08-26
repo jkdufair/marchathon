@@ -54,7 +54,9 @@ var isBlink = (isChrome || isOpera) && !!window.CSS;
 	// Parallax
 	var parallax = function() {
 		if (isOpera || isFirefox || isChrome)
-			$(window).stellar();
+			$(window).stellar({
+				horizontalScrolling: false
+			});
 	};
 
 	// Counter
