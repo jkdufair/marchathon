@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+.march-a-thon-cover {
+	min-height: inherit;
+	height: 275px;
+	top: 10px;
+	background-size: inherit;
+}
+
+.fh5co-cover-text > div {
+	width: 297px;
+	height: 297px;
+	position: absolute;
+	left: 50%;
+	top: -6px;
+	z-index: 999;
+}
+
+.fh5co-cover-text > div > img {
+	height: 297px;
+	width: 297px;
+	margin-left: -148px;
+}
+
+.fh5co-cover-style-1 > .fh5co-overlay {
+	background: rgba(0,0,0,0.5);
+}
+.fh5co-project-style-2 {
+	padding: 3em 0 0 0;
+}
+
+.fh5co-features-style-5 {
+	background: hsla(358,63%,42%,1);
+}
+
+.fh5co-features-style-5 h3 {
+    color: #ddd;
+}
+
+.fh5co-features-style-5 p {
+    color: #ddd;
+}
+
+.fh5co-feature h3 {
+    font-size: 32px;
+}
+
+.fh5co-feature .fh5co-icon {
+    float: left;
+    margin-right: 15px;
+    font-size: 32px;
+    color: white;
+}
+
+#map {
+	height: 600px;
+	width: 300px;
+	margin: 0 auto;
+}
+
+.fh5co-footer-style-3 {
+	padding-bottom: 0;
+	padding-top: 2em;
+}
+
+.fh5co-footer-style-3 .fh5co-footer-widget {
+	margin-bottom: inherit;
+}
+
+/* LIST #2 */
+.list2 { width:320px; }
+.list2 ul { font-family:Georgia, Times, serif; font-size:20px; color:#fff;  }
+.list2 ul li { }
+.list2 ul li p { padding:0 8px; font-style:normal; font-family:Arial; font-size:14px; color:#eee; border-left: 1px solid #999; margin: 0; font-weight:600}
+.list2 ul li p em { display:block; padding-left: 10px; margin-top: -6px; font-weight: normal;}
