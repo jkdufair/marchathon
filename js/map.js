@@ -93,7 +93,8 @@ function saveRequest() {
         lng: infoWindowCoordinates.lng,
         name: userFullName,
         emailAddress: userEmailAddress,
-        approved: false
+        isApproved: false,
+				shouldAcknowledge: false
     });
 
     infoWindow.close();
@@ -169,7 +170,7 @@ function initMap() {
         var marker = new google.maps.Marker({
             position: latLng,
             map: map,
-            icon: newPosition.approved ?
+            icon: newPosition.isApproved ?
                 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
         });
     });
