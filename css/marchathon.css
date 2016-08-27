@@ -94,3 +94,19 @@
 .list2 ul li { }
 .list2 ul li p { padding:0 8px; font-style:normal; font-family:Arial; font-size:16px; color:#fff; border-left: 1px solid #999; margin: 0; font-weight:600}
 .list2 ul li p em { display:block; padding-left: 10px; margin-top: -6px; font-weight: normal; color: #ccc;}
+
+.gm-style-iw h3 {
+	color: black;
+	text-transform: inherit;
+	margin: .5em 1em;
+	font-size: 24px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.gm-style-iw p {
+    color: black;
+    margin-bottom: .5em;
+    font-size: 15px;
+		text-align: center;
+}

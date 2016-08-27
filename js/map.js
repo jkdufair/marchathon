@@ -1,8 +1,7 @@
 var firebase = new Firebase("https://encoded-road-138721.firebaseio.com/");
 var requestForm = '<div id="request-infowindow">' +
 
-    '<h4 id="firstHeading" class="firstHeading">Request a personal concert!</h4>' +
-    '<div id="bodyContent">' +
+    '<h3>Request a concert!</h3>' +
 
     '<div id="infowindow-not-logged-in" style="display:none;">' +
     '<p>Please log into Facebook.<br/>We will collect your name and email address and get in touch with you shortly</p>' +
@@ -10,12 +9,11 @@ var requestForm = '<div id="request-infowindow">' +
     '</div>' +
 
     '<div id="infowindow-logged-in" style="display:none;">' +
-    '<span>My Name: </span><span id="userFullName"></span><br/>' +
-    '<span>My Email Address: </span><span id="userEmailAddress"></span><br/>' +
-    '<button onclick="saveRequest()">Reserve my concert!</button>' +
+    '<p><label>My Name:</label> <span id="userFullName"></span><br/>' +
+    '<label>My Email Address:</label> <span id="userEmailAddress"></span><br/></p>' +
+    '<p><button onclick="saveRequest()">Reserve my concert!</button></p>' +
     '</div>' +
 
-    '</div>' +
     '</div>';
 
 /*
@@ -36,14 +34,15 @@ var map,
   Info window
   -----
 */
-function createInfoWindow(e) {
+function createInfoWindow(e, content) {
     if (infoWindowOpen) return;
     infoWindow = new google.maps.InfoWindow({
-        content: requestForm,
+        content: content,
         position: {
             lat: e.latLng.lat(),
             lng: e.latLng.lng()
-        }
+        },
+				pixelOffset: new google.maps.Size(8,-26)
     });
     infoWindow.addListener('closeclick', function() {
         infoWindowOpen = false;
@@ -93,9 +92,16 @@ function saveRequest() {
         lng: infoWindowCoordinates.lng,
         name: userFullName,
         emailAddress: userEmailAddress,
+				address: '',
         isApproved: false,
 				shouldAcknowledge: false
     });
+		var latLng = new google.maps.LatLng(infoWindowCoordinates.lat, infoWindowCoordinates.lng);
+		var marker = new google.maps.Marker({
+				position: latLng,
+				map: map,
+				icon: 'images/pending.png'
+		});
 
     infoWindow.close();
     infoWindowOpen = false;
@@ -144,7 +150,9 @@ function initMap() {
                 map: map,
                 title: 'Click to reserve'
             });
-            searchMarker.addListener('click', createInfoWindow);
+            searchMarker.addListener('click', function(e) {
+							createInfoWindow(e, requestForm);
+						});
         }
     });
 
@@ -162,16 +170,21 @@ function initMap() {
 
     marchRouteLine.setMap(map);
 
-    map.addListener('click', createInfoWindow);
+    map.addListener('click', function(e) {
+			createInfoWindow(e, requestForm);
+		});
 
     firebase.on("child_added", function(snapshot, prevChildKey) {
-        var newPosition = snapshot.val();
-        var latLng = new google.maps.LatLng(newPosition.lat, newPosition.lng);
+        var concertRequest = snapshot.val();
+        var latLng = new google.maps.LatLng(concertRequest.lat, concertRequest.lng);
         var marker = new google.maps.Marker({
             position: latLng,
             map: map,
-            icon: newPosition.isApproved ?
-                'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+            icon: concertRequest.isApproved ?
+                'images/approved.png' : 'images/dot.png'
         });
+				marker.addListener('click', function() {
+					createInfoWindow({latLng: {lat: function(){return concertRequest.lat}, lng: function(){return concertRequest.lng}}}, '<h3>'+ concertRequest.name +'</h3><p>' + concertRequest.address + '</p>');
+				});
     });
 }
