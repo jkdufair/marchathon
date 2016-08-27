@@ -1,11 +1,13 @@
 var firebase = new Firebase("https://encoded-road-138721.firebaseio.com/");
 var requestForm = '<div id="request-infowindow">' +
-
     '<h3>Request a concert!</h3>' +
 
     '<div id="infowindow-not-logged-in" style="display:none;">' +
-    '<p>Please log into Facebook.<br/>We will collect your name and email address and get in touch with you shortly</p>' +
     '<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false" data-scope="public_profile,email" onlogin="drawInfoWindow();"></div>' +
+		'<p>&mdash;or&mdash;</p>' +
+		'<p><label>Your name:</label> <input type="text" id="form_full_name"></input>' +
+		'<label>Your email address:</label> <input type="text" id="form_email_address"></input></p>' +
+    '<p><button onclick="saveRequest()">Reserve my concert!</button></p>' +
     '</div>' +
 
     '<div id="infowindow-logged-in" style="display:none;">' +
@@ -23,7 +25,7 @@ var requestForm = '<div id="request-infowindow">' +
 */
 var map,
     infoWindow,
-    infoWindowOpen = false,
+    isInfoWindowOpen = false,
     infoWindowCoordinates,
     userFullName,
     userEmailAddress,
@@ -35,9 +37,9 @@ var map,
   -----
 */
 function createInfoWindow(e, content) {
-    if (infoWindowOpen) return;
+    if (isInfoWindowOpen) return;
     infoWindow = new google.maps.InfoWindow({
-        content: content,
+        content: '<img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/West_Lafayette_High_School_logo.png" />' + content,
         position: {
             lat: e.latLng.lat(),
             lng: e.latLng.lng()
@@ -45,11 +47,11 @@ function createInfoWindow(e, content) {
 				pixelOffset: new google.maps.Size(8,-26)
     });
     infoWindow.addListener('closeclick', function() {
-        infoWindowOpen = false;
+        isInfoWindowOpen = false;
     });
     infoWindow.addListener('domready', drawInfoWindow);
     infoWindow.open(map);
-    infoWindowOpen = true;
+    isInfoWindowOpen = true;
     infoWindowCoordinates = {
         lat: e.latLng.lat(),
         lng: e.latLng.lng()
@@ -87,11 +89,17 @@ function drawInfoWindow() {
 }
 
 function saveRequest() {
+	var localFullName = userFullName;
+	var localEmailAddress = userEmailAddress;
+	if (!userFullName) {
+		localFullName = $('#form_full_name').val();
+		localEmailAddress = $('#form_email_address').val();
+	}
     firebase.push({
         lat: infoWindowCoordinates.lat,
         lng: infoWindowCoordinates.lng,
-        name: userFullName,
-        emailAddress: userEmailAddress,
+        name: localFullName,
+        emailAddress: localEmailAddress,
 				address: '',
         isApproved: false,
 				shouldAcknowledge: false
@@ -104,7 +112,7 @@ function saveRequest() {
 		});
 
     infoWindow.close();
-    infoWindowOpen = false;
+    isInfoWindowOpen = false;
 
     $("#requestSuccess").fadeIn();
     setTimeout(function() {
@@ -171,7 +179,12 @@ function initMap() {
     marchRouteLine.setMap(map);
 
     map.addListener('click', function(e) {
-			createInfoWindow(e, requestForm);
+			if (isInfoWindowOpen) {
+				infoWindow.close();
+				isInfoWindowOpen = false;
+			} else {
+				createInfoWindow(e, requestForm);
+			}
 		});
 
     firebase.on("child_added", function(snapshot, prevChildKey) {
@@ -184,7 +197,10 @@ function initMap() {
                 'images/approved.png' : 'images/dot.png'
         });
 				marker.addListener('click', function() {
-					createInfoWindow({latLng: {lat: function(){return concertRequest.lat}, lng: function(){return concertRequest.lng}}}, '<h3>'+ concertRequest.name +'</h3><p>' + concertRequest.address + '</p>');
+					createInfoWindow(
+						{latLng: {lat: function(){return concertRequest.lat}, lng: function(){return concertRequest.lng}}}, concertRequest.shouldAcknowledge ?
+							'<h3>' + concertRequest.name +'</h3><p>' + concertRequest.address + '</p>' :
+							'<h3>Anonymous Donor</h3><p>' + concertRequest.address + '</p>');
 				});
     });
 }
