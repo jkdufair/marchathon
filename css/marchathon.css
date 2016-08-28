@@ -72,6 +72,13 @@
 	}
 }
 
+.alert {
+	position: absolute;
+	top: 152px;
+	left: 0px;
+	width: 100%;
+}
+
 .fh5co-features-style-3 {
 	padding: 3em 0;
 }
