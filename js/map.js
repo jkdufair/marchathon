@@ -50,6 +50,11 @@ function createInfoWindow(e, content) {
         isInfoWindowOpen = false;
     });
     infoWindow.addListener('domready', drawInfoWindow);
+		map.panTo({
+				lat: e.latLng.lat(),
+				lng: e.latLng.lng()
+		});
+		infoWindow.setOptions({disableAutoPan: true});
     infoWindow.open(map);
     isInfoWindowOpen = true;
     infoWindowCoordinates = {
