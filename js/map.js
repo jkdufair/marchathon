@@ -7,13 +7,13 @@ var requestForm = '<div id="request-infowindow">' +
 		'<p>&mdash;or&mdash;</p>' +
 		'<p><label>Your name:</label> <input type="text" id="form_full_name"></input>' +
 		'<label>Your email address:</label> <input type="text" id="form_email_address"></input></p>' +
-    '<p><button onclick="saveRequest()">Reserve my concert!</button></p>' +
+    '<p><button onclick="saveRequest()">RDP!</button></p>' +
     '</div>' +
 
     '<div id="infowindow-logged-in" style="display:none;">' +
     '<p><label>My Name:</label> <span id="userFullName"></span><br/>' +
     '<label>My Email Address:</label> <span id="userEmailAddress"></span><br/></p>' +
-    '<p><button onclick="saveRequest()">Reserve my concert!</button></p>' +
+    '<p><button onclick="saveRequest()">RDP!</button></p>' +
     '</div>' +
 
     '</div>';
