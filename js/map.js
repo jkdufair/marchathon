@@ -135,7 +135,7 @@ function initMap() {
     var mapElement = $("#map");
     map = new google.maps.Map(mapElement[0], {
         center: {
-            lat: 40.45313,
+            lat: 40.452000,
             lng: -86.909707
         },
         zoom: 14,
@@ -144,6 +144,17 @@ function initMap() {
         mapTypeControl: false,
         streetViewControl: false
     });
+		//start
+		var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(40.434174, -86.912965),
+				map: map,
+				icon: 'images/start.png'
+		});
+		var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(40.463354, -86.917557),
+				map: map,
+				icon: 'images/finish.png'
+		});
 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');

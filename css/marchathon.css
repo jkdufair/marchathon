@@ -128,3 +128,9 @@
 	display: flex !important;
 	justify-content: center;
 }
+
+#pac-input {
+	width: 90%;
+	left: 5% !important;
+	top: 4px !important;
+}
