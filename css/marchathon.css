@@ -72,8 +72,17 @@
 	}
 }
 
+.fh5co-features-style-3 {
+	padding: 3em 0;
+}
+
+.fh5co-features-style-3 h3 {
+	font-size: 40px;
+	text-align: center;
+}
+
 .fh5co-features-style-3 .row {
-	padding-bottom: 2em;
+	padding-bottom: 1em;
 }
 
 .fh5co-features-style-3 .row div {
