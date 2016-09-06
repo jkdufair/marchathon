@@ -145,6 +145,39 @@ function initMap() {
         streetViewControl: false
     });
 
+		var publicConcertMarkers = [
+			new google.maps.Marker({
+				position: new google.maps.LatLng(40.445043, -86.912699),
+				map: map,
+				icon: 'images/drum-small.png',
+				concertName: 'Burtsfield School'
+			}),
+			new google.maps.Marker({
+				position: new google.maps.LatLng(40.451477, -86.910805),
+				map: map,
+				icon: 'images/drum-small.png',
+				concertName: 'Silver Dipper Parking Lot'
+			}),
+			new google.maps.Marker({
+				position: new google.maps.LatLng(40.458340, -86.910932),
+				map: map,
+				icon: 'images/drum-small.png',
+				concertName: 'Lommel Park'
+			})
+		];
+
+		publicConcertMarkers.map(function(marker) {
+			marker.addListener('click', function() {
+				createInfoWindow({
+					latLng: {
+						lat: marker.position.lat,
+						lng: marker.position.lng
+					}},
+					'<h3>Public Concert</h3><p>' + marker.concertName + '</p>'
+				);
+			});
+		});
+
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
@@ -168,6 +201,8 @@ function initMap() {
 						});
         }
     });
+
+
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {

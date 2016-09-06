@@ -82,11 +82,20 @@
 
 .fh5co-features-style-3 {
 	padding: 3em 0;
+	text-align: center;
 }
 
 .fh5co-features-style-3 h3 {
 	font-size: 40px;
 	text-align: center;
+}
+
+.fh5co-features-style-3 h4 {
+    padding: .4em;
+    color: white;
+    font-size: 2.5rem;
+    background-color: #af272c;
+    margin-bottom: 0;
 }
 
 .fh5co-features-style-3 .row {
