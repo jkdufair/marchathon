@@ -122,7 +122,7 @@ function saveRequest() {
     $("#requestSuccess").fadeIn();
     setTimeout(function() {
         $("#requestSuccess").fadeOut();
-    }, 10000);
+    }, 3000);
 
 }
 
@@ -144,17 +144,6 @@ function initMap() {
         mapTypeControl: false,
         streetViewControl: false
     });
-		//start
-		var marker = new google.maps.Marker({
-				position: new google.maps.LatLng(40.434174, -86.912965),
-				map: map,
-				icon: 'images/start.png'
-		});
-		var marker = new google.maps.Marker({
-				position: new google.maps.LatLng(40.463354, -86.917557),
-				map: map,
-				icon: 'images/finish.png'
-		});
 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
@@ -185,14 +174,10 @@ function initMap() {
         searchBox.setBounds(map.getBounds());
     });
 
-    var marchRouteLine = new google.maps.Polyline({
-        path: marchRoute,
-        clickable: false,
-        strokeColor: '#FF0000',
-        strokeWeight: 4
-    });
-
-    marchRouteLine.setMap(map);
+		var routeLayer = new google.maps.KmlLayer({
+			url: 'http://www.westsidemarchathon.com/route.kml?cb=' + Math.random(),
+			map: map
+		});
 
     map.addListener('click', function(e) {
 			if (isInfoWindowOpen) {
