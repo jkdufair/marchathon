@@ -63,7 +63,7 @@
 #map {
 	height: 600px;
 	width: 250px;
-	margin: 0 auto;
+	margin: 0 auto 1em auto;
 }
 
 @media (min-width:450px) {
@@ -77,6 +77,7 @@
 	top: 50%;
 	left: 0px;
 	width: 100%;
+	text-align: center;
 }
 
 .fh5co-features-style-3 {
@@ -104,6 +105,10 @@
 
 .fh5co-footer-style-3 .fh5co-footer-widget {
 	margin-bottom: inherit;
+}
+
+.fh5co-logo, .fh5co-copyright {
+	text-align: center;
 }
 
 /* LIST #2 */
