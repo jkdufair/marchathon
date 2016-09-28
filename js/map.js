@@ -147,12 +147,6 @@ function initMap() {
 
 		var publicConcertMarkers = [
 			new google.maps.Marker({
-				position: new google.maps.LatLng(40.445043, -86.912699),
-				map: map,
-				icon: 'images/drum-small.png',
-				concertName: 'Burtsfield School'
-			}),
-			new google.maps.Marker({
 				position: new google.maps.LatLng(40.451477, -86.910805),
 				map: map,
 				icon: 'images/drum-small.png',
