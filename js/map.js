@@ -150,13 +150,19 @@ function initMap() {
 				position: new google.maps.LatLng(40.451477, -86.910805),
 				map: map,
 				icon: 'images/drum-small.png',
-				concertName: 'Silver Dipper Parking Lot'
+				concertName: 'Silver Dipper Parking Lot - approx. 11am'
+			}),
+			new google.maps.Marker({
+				position: new google.maps.LatLng(40.453805, -86.913),
+				map: map,
+				icon: 'images/drum-small.png',
+				concertName: 'The Russell Company - approx 11:30pm'
 			}),
 			new google.maps.Marker({
 				position: new google.maps.LatLng(40.458340, -86.910932),
 				map: map,
 				icon: 'images/drum-small.png',
-				concertName: 'Lommel Park'
+				concertName: 'Lommel Park - approx 12:30pm'
 			})
 		];
 
